@@ -1,0 +1,18 @@
+name: CDL aws credentials
+author: maik bialas
+description: fetches aws credentials for CDL
+inputs:
+  username:
+    description: "Continental datalake username"
+    required: true
+  password:
+    description: "Continental datalake password"
+    required: true
+outputs:
+  AWS_ACCESS_KEY_ID:
+    description: "aws access key" 
+  AWS_SECRET_ACCESS_KEY:
+    description: "aws access secret" 
+runs:
+  using: "node12"
+  main: "dist/index.js" 
