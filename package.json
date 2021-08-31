@@ -1,0 +1,25 @@
+{
+  "name": "datalake-ecr-image-build",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hellekin87/datalake-ecr-image-build.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hellekin87/datalake-ecr-image-build/issues"
+  },
+  "homepage": "https://github.com/Hellekin87/datalake-ecr-image-build#readme",
+  "dependencies": {
+    "@actions/core": "^1.4.0",
+    "@actions/github": "^5.0.0",
+    "@zeit/ncc": "^0.22.3",
+    "axios": "^0.21.1"
+  }
+}

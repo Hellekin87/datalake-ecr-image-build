@@ -2,7 +2,7 @@
 
 name: datalake ecr build and push
 env:
-  ecr-repo: "datalake-user-uia81723"
+  ecr-repo: "user-maiksawesomerepo"
   runs-on-os: "ubuntu-latest"
 
 # Controls when the workflow will run
@@ -38,17 +38,24 @@ jobs:
         with:
           aws-access-key-id: ${{ steps.datalake-creds.outputs.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ steps.datalake-creds.outputs.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ steps.datalake-creds.outputs.AWS_SESSION_TOKEN }} 
           aws-region: eu-central-1
 
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
+      - name: Get current time
+        uses: 1466587594/get-current-time@v2
+        id: current-time
+        with:
+          format: YYYYMMDDHHmmss
+          
       - name: Build, tag, and push image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ env.ecr-repo }}
-          IMAGE_TAG: ${{ github.sha }}
+          IMAGE_TAG: ${{ steps.current-time.outputs.formattedTime }}
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
